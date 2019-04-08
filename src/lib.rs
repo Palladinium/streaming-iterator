@@ -878,6 +878,7 @@ where
 {
     type Item = B;
 
+    #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         while let Some(item) = self.it.next() {
             if let Some(mapped) = (self.f)(item) {
@@ -894,6 +895,7 @@ where
     I: DoubleEndedStreamingIterator,
     F: FnMut(&I::Item) -> Option<B>,
 {
+    #[inline]
     fn next_back(&mut self) -> Option<B> {
         while let Some(item) = self.it.next_back() {
             if let Some(mapped) = (self.f)(item) {
